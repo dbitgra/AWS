@@ -1,5 +1,6 @@
 <?php 
-if(isset($_POST["email"])):
+if(isset($_POST["user"])):
+
 
 	require_once "lib/database.php";
 	require_once "obj/usuario.php";
@@ -7,7 +8,7 @@ if(isset($_POST["email"])):
 		//
 	$db=Database::getDatabase();
 
-	$nom=$_POST["nom"];
+	$nom=$_POST["user"];
 	$clave=$_POST["pass"];
 	$db->query("SELECT * FROM usuario WHERE usuario = '{$nom}' AND pass ='{$clave}';");
 	$usuario=$db->getData("Usuario");
@@ -27,7 +28,7 @@ endif;
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>index</title>
+	<title>Login</title>
 	<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
@@ -40,11 +41,11 @@ endif;
 			<div class="md:flex md:items-center mb-6">
 				<div class="md:w-1/3">
 					<label class="block text-blue-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
-						Email
+						Nombre de usuario
 					</label>
 				</div>
 				<div class="md:w-2/3">
-					<input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="email" name="email" type="text" placeholder="Correo" value="pacopepe@gmail.com" required>
+					<input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="user" name="user" type="text" placeholder="user" value="admin" required>
 				</div>
 			</div>
 			<div class="md:flex md:items-center mb-6">
@@ -54,7 +55,7 @@ endif;
 					</label>
 				</div>
 				<div class="md:w-2/3">
-					<input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="pass" name="pass" type="password" placeholder="*******" value="1234" required>
+					<input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="pass" name="pass" type="password" placeholder="*******" value="admin" required>
 				</div>
 			</div>
 			<div class="md:flex md:items-center">
@@ -65,6 +66,17 @@ endif;
 					</button>
 				</div>
 			</div>
+			<div class="flex items-center my-5">
+				<div class="md:w-1/3"></div>
+				<div class="md:w-2/3">
+					<a href="registro.php" class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">
+						Registrarse
+					</a>
+				</div>			
+			</div>
+			<a href="Olvidado.php" class="text-blue-400">
+				Contraseña olvidada
+			</a>
 		</form>
 		<?php if(isset($error)): ?>
 			<div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert"><?= $error ?>
